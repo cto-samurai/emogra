@@ -1,6 +1,8 @@
 <template lang='pug'>
 .EmoInput
     div
+        input(v-model="userId")
+    div
         div Agree
         v-btn(color="success" @click="onAgree(1)") 1
         v-btn(color="success" @click="onAgree(2)") 2
@@ -25,8 +27,8 @@
 <script>
 import firebase from 'firebase'
 
-function putNewEmotion(emoNum, strength) {
-    const emotionsRefStr = '/meetings/2/users/aaaaa/emotions/'
+function putNewEmotion(userId, emoNum, strength) {
+    const emotionsRefStr = '/meetings/2/users/' + userId + '/emotions/'
     const db = firebase.database()
     const obj = {
         emotion: emoNum,
@@ -42,6 +44,7 @@ export default {
   },
   data() {
     return {
+        userId: ""
     }
   },
   methods: {
