@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     emotionUpdated(users) {
+      if(!users) return
       const datasets = this.toDatasets(users)
       datasets.push(this.averageDataset(users))
       this.scatterData = { datasets }

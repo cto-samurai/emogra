@@ -8,7 +8,6 @@ export default {
   },
   watch: {
     data(nv) {
-      console.info('I am called', nv)
       this.renderChart(nv, this.options)
     }
   }

@@ -33,14 +33,14 @@ export default {
       const ms = snapshot.val()
       const meetings = []
       Object.keys(ms).forEach(x => {
-        if (ms[x].users != null) {
-          meetings.push({
-            icon: 'apps',
-            title: `${x}`,
-            to: `/view/${x}`,
-            data: ms[x]
-          })
-        }
+        // if (ms[x].users != null) {
+        meetings.push({
+          icon: 'apps',
+          title: `${ms[x].name}`,
+          to: `/view/${x}`,
+          data: ms[x]
+        })
+        // }
       })
       this.items = meetings
     })
