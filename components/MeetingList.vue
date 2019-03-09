@@ -23,25 +23,26 @@ export default {
   data() {
     return {
       meetings: undefined,
-      items: [
-        {
-          icon: 'apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
+      items: [],
     }
   },
   async mounted () {
     const db = firebase.database()
     const users = db.ref('/meetings')
     users.on('value', (snapshot) => {
-      console.log(snapshot.val())
+      const ms = snapshot.val()
+      const meetings = []
+      Object.keys(ms).forEach(x => {
+        if (ms[x].users != null) {
+          meetings.push({
+            icon: 'apps',
+            title: `${x}`,
+            to: '/',
+            data: ms[x]
+          })
+        }
+      })
+      this.items = meetings
     })
   }
 }
