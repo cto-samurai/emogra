@@ -9,8 +9,6 @@
 </template>
 
 <script>
-// import FirebaseConnect from '~/components/FirebaseConnect.vue'
-// import BarChart from '~/components/BarChart'
 
 import auth from '~/plugins/auth'
 import { mapGetters, mapActions } from 'vuex'

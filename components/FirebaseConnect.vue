@@ -20,11 +20,11 @@ export default {
     }
   },
   async mounted () {
-    // initialize your firebase app
-    firebase.initializeApp({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      databaseURL: process.env.FIREBASE_DATABASE_URL
-    })
+    // // initialize your firebase app
+    // firebase.initializeApp({
+    //   projectId: process.env.FIREBASE_PROJECT_ID,
+    //   databaseURL: process.env.FIREBASE_DATABASE_URL
+    // })
 
     // save a reference to the firestore database
     // to access it in the future
