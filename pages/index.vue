@@ -49,12 +49,16 @@ export default {
       return Object.keys(users).map((uid) => {
         const user = users[uid]
         const emotions = users[uid].emotions
+        const color = colors[userIndex++]
 
         return {
             label: `${user.fullname}`,
-            borderColor: colors[userIndex++],
-            fill: false,
-            showLine: false,
+            borderColor: color + 11,
+            backgroundColor: color + 11,
+            borderWidth: 1,
+            pointRadius: 2,
+            fill: true,
+            showLine: true,
             data: this.toData(emotions)
         }
       });
