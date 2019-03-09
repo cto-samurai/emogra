@@ -96,15 +96,20 @@ export default {
       // O(n)
       Object.keys(users).forEach((k) => { users[k].uuid = k });
       // O(n1 * n2)
-      const timestamps = Object.values(users)
-        .map((u) => { return Object.values(u.emotions).map((e) => { return [u.uuid, e.timestamp] }) })
+      const timestamps = Object.keys(users)
+        .map((uid) => { 
+          const user = users[uid]
+          return Object.keys(user.emotions).map((key) => {
+            const emotion = user.emotions[key]
+            return [uid, key, emotion.timestamp] }) })
         .flat()
-        .sort((a, b) => { return a[1] - b[1] });
+        .sort((a, b) => { return a[2] - b[2] });
       const latestScores = {};
       // O(n)
       const data = timestamps.map(((t) => {
+        debugger
         latestScores[t[0]] = this.convertEmotionToScore(users[t[0]].emotions[t[1]]);
-        return { x: t[1], y: average(Object.values(latestScores)) };
+        return { x: t[2], y: average(Object.values(latestScores)) };
       }));
       return {
         label: 'Everyone',
