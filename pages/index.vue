@@ -42,7 +42,7 @@ export default {
     emotionUpdated(users) {
       const datasets = this.toDatasets(users) 
       console.info('datasets', datasets);
-      this.scatterData = { datasets: this.toDatasets(users) };
+      this.scatterData = { datasets: this.toDatasets(users) }
     },
     toDatasets(users) {
       let userIndex = 0;
@@ -86,46 +86,9 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        width: 1200,
       },
       scatterData: {},
-      fakeLineChartData: {
-          datasets: [{
-            label: 'Dataset with string point data',
-            borderColor: 'red',
-            fill: false,
-            data: [{
-              x: newDateString(0),
-              y: randomScalingFactor()
-            }, {
-              x: newDateString(2),
-              y: randomScalingFactor()
-            }, {
-              x: newDateString(4),
-              y: randomScalingFactor()
-            }, {
-              x: newDateString(5),
-              y: randomScalingFactor()
-            }],
-          }, {
-            label: 'Dataset with date object point data',
-            borderColor: 'blue',
-            fill: false,
-            data: [{
-              x: newDate(0),
-              y: randomScalingFactor()
-            }, {
-              x: newDate(2),
-              y: randomScalingFactor()
-            }, {
-              x: newDate(4),
-              y: randomScalingFactor()
-            }, {
-              x: newDate(5),
-              y: randomScalingFactor()
-            }]
-          }
-        ]
-      } 
     }
   }
 }
