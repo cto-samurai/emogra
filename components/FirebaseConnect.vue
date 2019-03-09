@@ -2,6 +2,8 @@
 .FirebaseConnect
   div 'hello'
   div {{meetings}}
+  div .bar-chart
+    BarChart :data="barChartData" :options="{ maintainAspectRatio: false }"
 </template>
 
 <style lang='scss'>
@@ -11,9 +13,8 @@
 
 
 <script>
-
 import firebase from 'firebase'
-
+import { Bar } from 'vue-chartjs'
 
 export default {
   components: {
