@@ -6,7 +6,7 @@
   )
     v-flex(xs12)
       firebase-connect(@emotionUpdated="emotionUpdated")
-      scatter(:data="scatterData" :options="options" style="position: relative;")
+      scatter(:data="scatterData" :options="options" style="position: relative;width: 1200px;")
 </template>
 
 <script>
@@ -86,7 +86,7 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        width: 1200,
+        width: 1200
       },
       scatterData: {},
     }
