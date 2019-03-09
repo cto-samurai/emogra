@@ -10,7 +10,6 @@
 
 <script>
 import firebase from 'firebase'
-import { Bar } from 'vue-chartjs'
 
 export default {
   components: {

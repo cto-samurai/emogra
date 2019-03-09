@@ -6,14 +6,14 @@
   )
     v-flex(xs12)
       firebase-connect(@emotionUpdated="emotionUpdated")
-      line-chart(:data="lineChartData" :options="options" style="position: relative;")
+      scatter(:data="scatterData" :options="options" style="position: relative;")
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
 import FirebaseConnect from '~/components/FirebaseConnect.vue'
-import LineChart from '~/components/LineChart'
+import Scatter from '~/components/Scatter'
 import moment from 'moment'
 
 function newDate(days) {
@@ -28,33 +28,40 @@ function randomScalingFactor() {
   return Math.random() * 10;
 }
 
+const colors = [
+  "#69D2E7","#A7DBD8","#E0E4CC","#F38630","#FA6900",
+  "#FE4365","#FC9D9A","#F9CDAD","#C8C8A9","#83AF9B"
+];
+
 export default {
   components: {
     FirebaseConnect,
-    LineChart
+    Scatter
   },
   methods: {
     emotionUpdated(users) {
       const datasets = this.toDatasets(users) 
       console.info('datasets', datasets);
-      this.lineChartData = { datasets: this.toDatasets(users) };
+      this.scatterData = { datasets: this.toDatasets(users) };
     },
     toDatasets(users) {
+      let userIndex = 0;
       return Object.keys(users).map((uid) => {
         const user = users[uid]
         const emotions = users[uid].emotions
 
         return {
             label: `${user.fullname}`,
-            borderColor: 'red',
+            borderColor: colors[userIndex++],
             fill: false,
+            showLine: false,
             data: this.toData(emotions)
         }
       });
     },
     toData(emotions) {
-      return Object.keys(emotions).map((uuid) => {
-        const emotion = emotions[uuid]
+      const sortedEmotions = Object.values(emotions).sort((a, b) => { return a.timestamp - b.timestamp; });
+      return sortedEmotions.map((emotion) => {
         return {
           x: emotion.timestamp,
           y: this.convertEmotionToY(emotion)
@@ -80,7 +87,7 @@ export default {
         responsive: true,
         maintainAspectRatio: false,
       },
-      lineChartData: {},
+      scatterData: {},
       fakeLineChartData: {
           datasets: [{
             label: 'Dataset with string point data',
