@@ -20,7 +20,8 @@
     "vue-chartjs": "^3.4.0",
     "vuefire": "^2.0.0-alpha.20",
     "vuetify": "^1.5.5",
-    "vuetify-loader": "^1.2.1"
+    "vuetify-loader": "^1.2.1",
+    "vuexfire": "^2.3.1"
   },
   "devDependencies": {
     "coffee-loader": "^0.9.0",

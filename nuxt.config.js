@@ -5,10 +5,13 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
   mode: 'spa',
-
   env: {
     FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
-    FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL
+    FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
+    FIREBASE_APIKEY: process.env.FIREBASE_APIKEY,
+    FIREBASE_AUTHDOMAIN: process.env.FIREBASE_AUTHDOMAIN,
+    FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
+    FIREBASE_MESSAGINGSENDERID: process.env.FIREBASE_MESSAGINGSENDERID,
   },
   /*
   ** Headers of the page
