@@ -5,7 +5,7 @@
     align-center
   )
     v-flex(xs12)
-      //-firebase-connect
+      firebase-connect(@emotionUpdated="emotionUpdated")
       line-chart(:data="lineChartData" :options="options" style="position: relative;")
 </template>
 
@@ -33,23 +33,55 @@ export default {
     FirebaseConnect,
     LineChart
   },
+  methods: {
+    emotionUpdated(users) {
+      const datasets = this.toDatasets(users) 
+      console.info('datasets', datasets);
+      this.lineChartData = { datasets: this.toDatasets(users) };
+    },
+    toDatasets(users) {
+      return Object.keys(users).map((uid) => {
+        const user = users[uid]
+        const emotions = users[uid].emotions
+
+        return {
+            label: `${user.fullname}`,
+            borderColor: 'red',
+            fill: false,
+            data: this.toData(emotions)
+        }
+      });
+    },
+    toData(emotions) {
+      return Object.keys(emotions).map((uuid) => {
+        const emotion = emotions[uuid]
+        return {
+          x: emotion.timestamp,
+          y: this.convertEmotionToY(emotion)
+        }
+      });
+    },
+    convertEmotionToY(emotion) {
+      switch(emotion.emotion) {
+        case 1: // agree
+          return 4 + emotion.strength;
+        case 2: // disagree
+          return 4 - emotion.strength;
+        case 3: // confused
+          return 4;
+        default: // absent
+          return 0;
+      }
+    }
+  },
   data() {
     return {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        /*
-        layout: {
-          padding: {
-            left: 50,
-            right: 0,
-            top: 0,
-            bottom: 0
-          }
-        }	
-        */
       },
-      lineChartData: {
+      lineChartData: {},
+      fakeLineChartData: {
           datasets: [{
             label: 'Dataset with string point data',
             borderColor: 'red',

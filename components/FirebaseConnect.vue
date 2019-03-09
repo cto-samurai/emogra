@@ -1,9 +1,5 @@
 <template lang='pug'>
 .FirebaseConnect
-  div 'hello'
-  div {{meetings}}
-  div .bar-chart
-    BarChart :data="barChartData" :options="{ maintainAspectRatio: false }"
 </template>
 
 <style lang='scss'>
@@ -25,9 +21,6 @@ export default {
     }
   },
   async mounted () {
-
-    console.log(process.env.FIREBASE_DATABASE_URL)
-
     // initialize your firebase app
     firebase.initializeApp({
       projectId: process.env.FIREBASE_PROJECT_ID,
@@ -37,10 +30,9 @@ export default {
     // save a reference to the firestore database
     // to access it in the future
     const db = firebase.database()
-    const meetings = db.ref('/meetings')
-    meetings.once('value').then((snapshot) => {
-      console.log(snapshot.val())
-      this.meetings = snapshot.val()
+    const users = db.ref('/meetings/2/users')
+    users.on('value', (snapshot) => {
+      this.$emit('emotionUpdated', snapshot.val())
     })
   }
 }
