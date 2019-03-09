@@ -1,8 +1,6 @@
 <template lang='pug'>
 .EmoInput
     div
-        input(v-model="userId")
-    div
         div Agree
         v-btn(color="success" @click="onAgree(1)") 1
         v-btn(color="success" @click="onAgree(2)") 2
@@ -18,6 +16,9 @@
     div
         div Absent
         v-btn(color="warning" @click="onAbsent(1)") Absent
+    div
+        v-text-field(v-model="userId" placeholder="Your name")
+    div {{userId}}
 </template>
 
 <style lang='scss'>
@@ -50,31 +51,22 @@ export default {
   methods: {
       onAgree(strength) {
           console.info("onAgree", strength)
-          putNewEmotion(1, strength)
+          putNewEmotion(this.userId, 1, strength)
       },
       onDisagree(strength) {
           console.info("onDisagreed", strength)
-          putNewEmotion(2, strength)
+          putNewEmotion(this.userId, 2, strength)
       },
       onConfused(strength) {
           console.info("onConfused", strength)
-          putNewEmotion(3, strength)
+          putNewEmotion(this.userId, 3, strength)
       },
       onAbsent(strength) {
           console.info("onAbsent", strength)
-          putNewEmotion(4, strength)
+          putNewEmotion(this.userId, 4, strength)
       },
   },
   async mounted() {
-    // initialize your firebase app
-    firebase.initializeApp({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      databaseURL: process.env.FIREBASE_DATABASE_URL
-    })
-
-    // save a reference to the firestore database
-    // to access it in the future
-    const db = firebase.database()
   }
 }
 </script>
