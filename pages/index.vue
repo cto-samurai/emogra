@@ -119,7 +119,8 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        width: 1200
+        width: 1200,
+        animation: false
       },
       scatterData: {},
     }
