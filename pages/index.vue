@@ -6,7 +6,7 @@
   )
     v-flex(xs12)
       //-firebase-connect
-      bar-chart(:data="barChartData" :options="{ maintainAspectRatio: false,responsive: true}")
+      bar-chart(:data="barChartData" :options="{ maintainAspectRatio: false }")
 </template>
 
 <script>
