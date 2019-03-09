@@ -28,6 +28,10 @@ function randomScalingFactor() {
   return Math.random() * 10;
 }
 
+function average(values) {
+  return values.reduce((acc, val) => { return acc + val }, 0) / values.length;
+}
+
 const colors = [
   "#69D2E7","#A7DBD8","#E0E4CC","#F38630","#FA6900",
   "#FE4365","#FC9D9A","#F9CDAD","#C8C8A9","#83AF9B"
@@ -40,9 +44,9 @@ export default {
   },
   methods: {
     emotionUpdated(users) {
-      const datasets = this.toDatasets(users) 
-      console.info('datasets', datasets);
-      this.scatterData = { datasets: this.toDatasets(users) }
+      const datasets = this.toDatasets(users)
+      datasets.push(this.averageDataset(users))
+      this.scatterData = { datasets }
     },
     toDatasets(users) {
       let userIndex = 0;
@@ -64,11 +68,11 @@ export default {
       return sortedEmotions.map((emotion) => {
         return {
           x: emotion.timestamp,
-          y: this.convertEmotionToY(emotion)
+          y: this.convertEmotionToScore(emotion)
         }
       });
     },
-    convertEmotionToY(emotion) {
+    convertEmotionToScore(emotion) {
       switch(emotion.emotion) {
         case 1: // agree
           return 4 + emotion.strength;
@@ -79,6 +83,28 @@ export default {
         default: // absent
           return 0;
       }
+    },
+    averageDataset(users) {
+      // O(n)
+      Object.keys(users).forEach((k) => { users[k].uuid = k });
+      // O(n1 * n2)
+      const timestamps = Object.values(users)
+        .map((u) => { return Object.values(u.emotions).map((e) => { return [u.uuid, e.timestamp] }) })
+        .flat()
+        .sort((a, b) => { return a[1] - b[1] });
+      const latestScores = {};
+      // O(n)
+      const data = timestamps.map(((t) => {
+        latestScores[t[0]] = this.convertEmotionToScore(users[t[0]].emotions[t[1]]);
+        return { x: t[1], y: average(Object.values(latestScores)) };
+      }));
+      return {
+        label: 'Everyone',
+        borderColor: 'red',
+        fill: false,
+        showLine: true,
+        data
+      };
     }
   },
   data() {
