@@ -51,18 +51,22 @@ export default {
   methods: {
       onAgree(strength) {
           console.info("onAgree", strength)
+          if (this.userId == "") return
           putNewEmotion(this.userId, 1, strength)
       },
       onDisagree(strength) {
           console.info("onDisagreed", strength)
+          if (this.userId == "") return
           putNewEmotion(this.userId, 2, strength)
       },
       onConfused(strength) {
           console.info("onConfused", strength)
+          if (this.userId == "") return
           putNewEmotion(this.userId, 3, strength)
       },
       onAbsent(strength) {
           console.info("onAbsent", strength)
+          if (this.userId == "") return
           putNewEmotion(this.userId, 4, strength)
       },
   },
