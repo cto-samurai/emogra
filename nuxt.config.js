@@ -6,6 +6,10 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 module.exports = {
   mode: 'spa',
 
+  env: {
+    FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
+    FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL
+  },
   /*
   ** Headers of the page
   */
@@ -51,6 +55,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Axios module configuration
