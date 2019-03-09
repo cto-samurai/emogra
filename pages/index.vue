@@ -77,6 +77,9 @@ export default {
       });
     },
     convertEmotionToScore(emotion) {
+      if (!emotion) {
+        return 0;
+      }
       switch(emotion.emotion) {
         case 1: // agree
           return 4 + emotion.strength;
