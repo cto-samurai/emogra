@@ -56,7 +56,7 @@ export default {
         const color = colors[userIndex++]
 
         return {
-            label: `${user.fullname}`,
+            label: uid,
             borderColor: color + 11,
             backgroundColor: color + 11,
             borderWidth: 1,
