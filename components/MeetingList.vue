@@ -37,7 +37,7 @@ export default {
           meetings.push({
             icon: 'apps',
             title: `${x}`,
-            to: '/',
+            to: `/view/${x}`,
             data: ms[x]
           })
         }

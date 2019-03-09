@@ -14,6 +14,12 @@ import firebase from 'firebase'
 export default {
   components: {
   },
+  props: {
+    id: {
+      type: String,
+      default: '2'
+    }
+  },
   data() {
     return {
       meetings: undefined
@@ -29,7 +35,7 @@ export default {
     // save a reference to the firestore database
     // to access it in the future
     const db = firebase.database()
-    const users = db.ref('/meetings/2/users')
+    const users = db.ref(`/meetings/${this.id}/users`)
     users.on('value', (snapshot) => {
       this.$emit('emotionUpdated', snapshot.val())
     })
