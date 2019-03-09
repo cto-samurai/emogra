@@ -56,7 +56,7 @@ export default {
         const color = colors[userIndex++]
 
         return {
-            label: `${user.fullname}`,
+            label: uid,
             borderColor: color + 11,
             backgroundColor: color + 11,
             borderWidth: 1,
@@ -77,6 +77,9 @@ export default {
       });
     },
     convertEmotionToScore(emotion) {
+      if (!emotion) {
+        return 0;
+      }
       switch(emotion.emotion) {
         case 1: // agree
           return 4 + emotion.strength;
@@ -116,7 +119,8 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        width: 1200
+        width: 1200,
+        animation: false
       },
       scatterData: {},
     }
