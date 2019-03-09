@@ -18,6 +18,7 @@ import VuetifyLogo from '~/components/VuetifyLogo.vue'
 import FirebaseConnect from '~/components/FirebaseConnect.vue'
 import Scatter from '~/components/Scatter'
 import moment from 'moment'
+import colors from '~/common/colors'
 
 function newDate(days) {
 	return moment().add(days, 'd').toDate();
@@ -34,11 +35,6 @@ function randomScalingFactor() {
 function average(values) {
   return values.reduce((acc, val) => { return acc + val }, 0) / values.length;
 }
-
-const colors = [
-  "#69D2E7","#A7DBD8","#E0E4CC","#F38630","#FA6900",
-  "#FE4365","#FC9D9A","#F9CDAD","#C8C8A9","#83AF9B"
-];
 
 export default {
   components: {
@@ -60,7 +56,7 @@ export default {
         const color = colors[userIndex++]
 
         return {
-            label: `${user.fullname}`,
+            label: uid,
             borderColor: color + 11,
             backgroundColor: color + 11,
             borderWidth: 1,
