@@ -107,7 +107,6 @@ export default {
       const latestScores = {};
       // O(n)
       const data = timestamps.map(((t) => {
-        debugger
         latestScores[t[0]] = this.convertEmotionToScore(users[t[0]].emotions[t[1]]);
         return { x: t[2], y: average(Object.values(latestScores)) };
       }));
